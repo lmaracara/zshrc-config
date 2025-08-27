@@ -134,3 +134,57 @@ export NVM_DIR="$HOME/.nvm"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+current_dir=$(pwd)
+client_name="void_client"
+
+applyTWConfigurations(){
+	echo "Applying Thoughtworks configurations"
+
+	# Git
+	git config --global user.name "Luis Maracara"
+	git config --global user.email "luis.maracara@thoughtworks.com"
+	git config --global commit.gpgsign true
+	git config --global user.signing key E95C0140072D29D1 # Luis Maracara's GPG Key
+	git config --global gpg.program gpg
+
+	# AWS
+}
+
+applyClientSpecificConfigurations(){
+	echo "Applying $client_name configurations"
+
+	# Git
+	git config --global user.name "Luis Maracara"
+	git config --global user.email ""
+	git config --global commit.gpgsign false
+	git config --global user.signingkey ""
+	git config --global gpg.program gpg
+
+	# AWS
+}
+
+# Detect if we are in Thoughtworks folder to apply Git specific configurations
+if [[ "$PWD" == *"thoughtworks"* ]]; then
+	applyTWConfigurations
+	
+# Else if I am in the client folder then apply client specific configurations
+elif [[ "$PWD" == *"$client_name"* ]]; then
+	applyClientSpecificConfigurations
+fi
+
+cd() {
+  builtin cd "$@" || return
+  
+  was_in_tw=false
+  now_in_tw=false
+
+  [[ "$OLDPWD" == *"thoughtworks"* ]] && was_in_tw=true
+  [[ "$PWD" == *"thoughtworks"* ]] && now_in_tw=true
+
+  if $now_in_tw && ! $was_in_tw; then
+    applyTWConfigurations
+  elif [[ "$PWD" == *"$client_name"* ]] && [[ "$OLDPWD" != *"$client_name"* ]]; then
+    applyClientSpecificConfigurations
+  fi
+}
