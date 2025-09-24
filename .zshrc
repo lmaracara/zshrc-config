@@ -123,6 +123,7 @@ alias nv="nvim"
 alias zshconfig="nv ~/.zshrc"
 alias szsh="source ~/.zshrc"
 alias fk="fuck"
+alias py="python3"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -145,10 +146,13 @@ applyTWConfigurations(){
 	git config --global user.name "Luis Maracara"
 	git config --global user.email "luis.maracara@thoughtworks.com"
 	git config --global commit.gpgsign true
-	git config --global user.signing key E95C0140072D29D1 # Luis Maracara's GPG Key
+	git config --global user.signingkey E95C0140072D29D1 # Luis Maracara's GPG Key
 	git config --global gpg.program gpg
 
+  export GITHUB_API_TOKEN= # Generate it
+
 	# AWS
+  export AWS_PROFILE=tw # This requires to you to configure this profle, run aws configure sso --profile tw and follow the wizzard prompts
 }
 
 applyClientSpecificConfigurations(){
@@ -188,3 +192,4 @@ cd() {
     applyClientSpecificConfigurations
   fi
 }
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
