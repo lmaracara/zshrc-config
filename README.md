@@ -22,15 +22,7 @@ A fast, flexible, and beautiful Zsh prompt.
 ```sh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 ```
-**Configure Powerlevel10k:**  
-Set the theme in your `.zshrc`:
-```sh
-ZSH_THEME="powerlevel10k/powerlevel10k"
-```
-To customize your prompt, run:
-```sh
-p10k configure
-```
+**NOTE** After linking this zshrc and sourcing it the p10k configuration wizzard will automatically appear.
 
 ## Plugin Installation
 
@@ -63,7 +55,14 @@ This configuration uses several plugins:
 	git clone https://github.com/MichaelAquilina/zsh-you-should-use $ZSH_CUSTOM/plugins/you-should-use
 	```
 - **zsh-bat** ([GitHub](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/zsh-bat))
-	(Included with Oh My Zsh, just add to plugins list)
+	```sh
+	git clone https://github.com/fdellwing/zsh-bat.git $ZSH_CUSTOM/plugins/zsh-bat
+	```
+ ** NOTE **: In order to zsh bat to work you will need to install [**bat**](https://github.com/sharkdp/bat) in your machine:
+
+ ```sh
+ brew install bat
+ ```
 - **thefuck** ([GitHub](https://github.com/nvbn/thefuck))
 	```sh
 	brew install thefuck
@@ -77,7 +76,7 @@ This configuration uses several plugins:
 	 ```
 2. **Link the provided .zshrc:**
 	 ```sh
-	 ln -s <absolute_path_to_this_folder>/.zshrc ~/.zshrc
+	 ln -s $(pwd)/.zshrc ~/.zshrc
 	 ```
 3. **Reload your shell:**
 	 ```sh
@@ -89,6 +88,18 @@ This configuration uses several plugins:
 - Customize aliases and user settings in the `.zshrc` as needed.
 - For prompt customization, edit `~/.p10k.zsh` or run `p10k configure`.
 - Ensure you have [Homebrew](https://brew.sh/) installed for easy plugin installation.
+
+## Extra configurations
+
+**Configure Powerlevel10k:**  
+Set the theme in your `.zshrc`:
+```sh
+ZSH_THEME="powerlevel10k/powerlevel10k"
+```
+To customize your prompt, run:
+```sh
+p10k configure
+```
 
 ---
 Enjoy your enhanced terminal experience!
